@@ -1,0 +1,2 @@
+Udemy - Reactive Angular Course (with RxJs, Angular 20)
+https://www.udemy.com/share/101X24/

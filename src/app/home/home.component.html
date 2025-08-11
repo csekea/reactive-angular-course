@@ -5,9 +5,10 @@
 
     <mat-tab-group>
 
-        <mat-tab label="Beginners">
+      <mat-tab label="Beginners">
+        @for(course of (beginnerCourses$ | async); track course.id){
 
-          <mat-card *ngFor="let course of beginnerCourses" class="course-card mat-elevation-z10">
+          <mat-card class="course-card mat-elevation-z10">
 
             <mat-card-header>
 
@@ -35,12 +36,14 @@
             </mat-card-actions>
 
           </mat-card>
+        }
 
         </mat-tab>
 
         <mat-tab label="Advanced">
+          @for(course of (advancedCourses$ | async); track course.id){
 
-          <mat-card *ngFor="let course of advancedCourses" class="course-card mat-elevation-z10">
+          <mat-card class="course-card mat-elevation-z10">
 
             <mat-card-header>
 
@@ -68,7 +71,7 @@
             </mat-card-actions>
 
           </mat-card>
-
+        }
         </mat-tab>
 
     </mat-tab-group>
