@@ -109,29 +109,37 @@
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss",
-      "type": "component"
+      "type": "component",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:directive": {
       "prefix": "",
-      "type": "directive"
+      "type": "directive",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:service": {
-      "type": "service"
+      "type": "service",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:guard": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:interceptor": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:module": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:pipe": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "project": "reactive-angular-course"
     },
     "@schematics/angular:resolver": {
-      "typeSeparator": "."
+      "typeSeparator": ".",
+      "project": "reactive-angular-course"
     }
   },
   "cli": {

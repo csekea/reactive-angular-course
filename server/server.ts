@@ -22,7 +22,7 @@ app.route('/api/courses/:id').get(getCourseById);
 
 app.route('/api/lessons').get(searchLessons);
 
-app.route('/api/courses/:id').put(saveCourse);
+app.route('/api/courses/:id').patch(saveCourse);
 
 app.route('/api/login').post(loginUser);
 

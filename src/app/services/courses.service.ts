@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { Course } from '../model/course';
 
 @Injectable({
@@ -16,12 +16,20 @@ export class CoursesService {
     getCourses(): Observable<Course[]> {
         return this.http.get<Course[]>(this.apiUrl)
         .pipe(
-            map(res => res['payload'])
+            map(res => res['payload']),
+            shareReplay()
         );
     }
 
     getCourse(id: number): Observable<Course> {
         return this.http.get<Course>(`${this.apiUrl}/${id}`);
+    }
+
+    saveCourse(courseId: string, changes: Partial<Course>): Observable<Course> {
+        return this.http.patch<Course>(`${this.apiUrl}/${courseId}`, changes)
+        .pipe(
+            shareReplay()
+        );
     }
 
     createCourse(course: Course): Observable<Course> {
