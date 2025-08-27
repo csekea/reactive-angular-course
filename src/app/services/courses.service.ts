@@ -10,12 +10,13 @@ import { Lesson } from '../model/lesson';
 })
 export class CoursesService {
 
-    private readonly apiUrl = '/api/courses';
+    private readonly coursesUrl = '/api/courses';
+    private readonly lessonsUrl = '/api/lessons';
 
     constructor(private http: HttpClient) {}
 
     getCourses(): Observable<Course[]> {
-        return this.http.get<Course[]>(this.apiUrl)
+        return this.http.get<Course[]>(this.coursesUrl)
         .pipe(
             map(res => res['payload']),
             shareReplay()
@@ -23,30 +24,38 @@ export class CoursesService {
     }
 
     getCourse(id: number): Observable<Course> {
-        return this.http.get<Course>(`${this.apiUrl}/${id}`);
+        return this.http.get<Course>(`${this.coursesUrl}/${id}`)
+        .pipe(
+            shareReplay()
+        );
     }
 
     saveCourse(courseId: string, changes: Partial<Course>): Observable<Course> {
-        return this.http.patch<Course>(`${this.apiUrl}/${courseId}`, changes)
+        return this.http.patch<Course>(`${this.coursesUrl}/${courseId}`, changes)
         .pipe(
             shareReplay()
         );
     }
 
     createCourse(course: Course): Observable<Course> {
-        return this.http.post<Course>(this.apiUrl, course);
+        return this.http.post<Course>(this.coursesUrl, course);
     }
 
-    updateCourse(course: Course): Observable<Course> {
-        return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course);
-    }
-
-    deleteCourse(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    getLessonsByCourse(courseId: number): Observable<Lesson[]> {
+        return this.http.get<Lesson[]>(this.lessonsUrl, {
+            params: {
+                courseId: courseId.toString(),
+                pageSize: "100000"
+            }
+        })
+        .pipe(
+            map(res => res["payload"]),
+            shareReplay()
+        )
     }
 
     searchLessons(search: string): Observable<Lesson[]>{
-        return this.http.get<Lesson[]>("/api/lessons", {
+        return this.http.get<Lesson[]>(this.lessonsUrl, {
             params: {
                 filter: search,
                 pageSize: "100"
